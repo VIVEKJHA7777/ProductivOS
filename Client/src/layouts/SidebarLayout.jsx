@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AddTaskRoundedIcon from '@mui/icons-material/AddTaskRounded';
 import OutlinedFlagRoundedIcon from '@mui/icons-material/OutlinedFlagRounded';
 import QueryStatsRoundedIcon from '@mui/icons-material/QueryStatsRounded';
@@ -6,6 +6,7 @@ import AccessAlarmsRoundedIcon from '@mui/icons-material/AccessAlarmsRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import BarChartRoundedIcon from '@mui/icons-material/BarChartRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
+import { href, Outlet } from 'react-router-dom'
 
 const SidebarLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -52,31 +53,36 @@ const SidebarLayout = () => {
             {[
               {
                 label:'Dashboard', 
-                icon: <QueryStatsRoundedIcon/>
+                icon: <QueryStatsRoundedIcon/>,
+                href: "/dashboard",
               },
               {
                 label:'Tasks', 
                 icon: <AddTaskRoundedIcon/>,
+                href: "/tasks",
                 badge: 'Pro'
               },
               {
                 label:'Goals', 
                 icon: <OutlinedFlagRoundedIcon/>,
+                href: "/Goals",
                 badge: 3
               },
               {
                 label:'Time', 
-                icon: <AccessAlarmsRoundedIcon/>
+                icon: <AccessAlarmsRoundedIcon/>,
+                href: "/time",
               },
               {
                 label:'Calender', 
-                icon: <CalendarMonthRoundedIcon/>
+                icon: <CalendarMonthRoundedIcon/>,
+                href: "/calender"
               },
             ].map((item,idx)=>(
               <li key={idx}>
               <a
-                href="#"
-                className="flex items-center p-2 text-gray-100 rounded-lg hover:bg-gray-600 dark:hover:bg-gray-100 hover:text-white group"
+                href={item.href}
+                className="flex items-center p-2 text-gray-100 rounded-lg hover:bg-gray-600 dark:hover:bg-gray-600 hover:text-white group"
               >
                 {item.icon}
                 <span className="ms-3">{item.label}</span>
@@ -93,6 +99,10 @@ const SidebarLayout = () => {
           </ul>
         </div>
       </aside>
+      {/* main Content */}
+      <div className="p-4 sm:ml-64 w-full">
+        <Outlet/>
+      </div>
     </div>
   );
 };
